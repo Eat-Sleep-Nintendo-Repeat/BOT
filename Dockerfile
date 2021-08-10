@@ -1,4 +1,14 @@
-FROM node:16.3.0
+FROM node:16.6.1
+
+# Install Google Chromw
+RUN \
+  wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
+  echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list && \
+  apt-get update && \
+  apt-get install -y google-chrome-stable && \
+  rm -rf /var/lib/apt/lists/*s
+
+ENV PUPPETEER_EXECUTABLE_PATH='/usr/bin/google-chrome'
 
 # Timezone Stuff
 RUN apt-get install -y tzdata
@@ -12,12 +22,9 @@ WORKDIR /usr/src/app
 # where available (npm@5+)
 COPY package*.json ./
 
-RUN npm install
-# If you are building your code for production
-# RUN npm ci --only=production
+RUN npm ci --only=production
 
 # Bundle app source
 COPY . .
 
-#TAEFIK CONFIG
 CMD [ "node", "index.js" ]
