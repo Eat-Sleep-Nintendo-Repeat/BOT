@@ -29,14 +29,14 @@ for (const file of commanddir) {
 const rest = new REST({ version: '9' }).setToken(config.discord.bot_token);
 (async () => {
     try {
-      console.log('Started refreshing application (/) commands.');
+      console.log('[DISCORD] Started refreshing application (/) commands.');
   
       await rest.put(
         Routes.applicationGuildCommands(config.discord.client_id, "604747271862485012"),
         { body: commands },
       );
   
-      console.log('Successfully reloaded application (/) commands.');
+      console.log('[DISCORD] Successfully reloaded application (/) commands.');
     } catch (error) {
       console.error(error);
     }
