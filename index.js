@@ -17,7 +17,7 @@ require("./database")
 require("./webserver/webindex")
 
 //Events
-// require("./Events/welcome")
+require("./Events/welcome")
 require("./Events/accept_rules")
 
 client.login(config.discord.bot_token)
