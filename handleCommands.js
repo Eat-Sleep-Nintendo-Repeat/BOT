@@ -32,7 +32,7 @@ const rest = new REST({ version: '9' }).setToken(config.discord.bot_token);
       console.log('[DISCORD] Started refreshing application (/) commands.');
   
       await rest.put(
-        Routes.applicationGuildCommands(config.discord.client_id, "604747271862485012"),
+        Routes.applicationCommands(config.discord.client_id),
         { body: commands },
       );
   
@@ -52,7 +52,7 @@ client.on('interactionCreate', async interaction => {
     if (!client.commands.has(interaction.commandName)) {
         await interaction.reply({ephemeral: true, embeds: [new Discord.MessageEmbed().setColor(config.colors.error).setTitle("Unbekannter Befehl?").setDescription(`Dieser Befehl sollte nicht in eurer Liste sein. Warscheinlich ist es ein alter Befehl der entfernt wurde. Ich werde ihn vorerst aus der Befehlsliste entfernen`)]})
         try {
-        await rest.delete(Routes.applicationGuildCommand(config.discord.client_id, "604747271862485012", interaction.id))
+        await rest.delete(Routes.applicationCommands(config.discord.client_id, interaction.id))
         }
         catch (e) {}
     }
