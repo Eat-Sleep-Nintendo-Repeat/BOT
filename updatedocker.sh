@@ -1,3 +1,3 @@
-docker build -t dustin/esnr-api:v1 . 
-docker rm --force  ESNR-API-v1
-docker run -d --restart always --name ESNR-API-v1 --network=web -p 7871:7869 dustin/esnr-api:v1
+docker build -t dustin/esnr-bot:v3 . 
+docker rm --force  ESNR-BOT-v3
+docker run -d --restart always --name ESNR-API-v3dustin/esnr-bot:v3

@@ -1,4 +1,4 @@
-FROM node
+FROM node:16.3.0
 
 # Timezone Stuff
 RUN apt-get install -y tzdata
@@ -20,14 +20,4 @@ RUN npm install
 COPY . .
 
 #TAEFIK CONFIG
-LABEL traefik.enable="true" \
-      traefik.http.routers.esnr-api.entrypoints="websecure" \
-      traefik.http.routers.esnr-api.rule="Host(`eat-sleep-nintendo-repeat.eu`) && PathPrefix(`/api/v1`)" \
-      traefik.http.middlewares.esnr-api-stripprefix.stripprefix.prefixes="/api/v1" \
-      traefik.http.middlewares.esnr-api-ratelimit.ratelimit.average=10 \
-      traefik.http.routers.esnr-api.middlewares="esnr-api-stripprefix, esnr-api-ratelimit" \
-      traefik.port="7871" \
-      traefik.http.routers.esnr-api.tls.certresolver="lets-encr"
-
-EXPOSE 7869
 CMD [ "node", "index.js" ]
