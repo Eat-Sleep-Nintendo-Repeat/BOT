@@ -1,6 +1,6 @@
 exports.command = {
 	name: 'ranklist',
-	call: 'rankkist',
+	call: 'ranklist',
 	description: 'Ein Befehl, der eine übersicht der Top-10 ranking user postet',
 
     options: [],
