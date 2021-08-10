@@ -8,14 +8,14 @@ const config = require("./config.json")
 
 
 //read all Commandfiles
-var commanddir = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+var commanddir = fs.readdirSync('./Commands').filter(file => file.endsWith('.js'));
 client.commands = new Discord.Collection();
 var commands = []
 
 
 for (const file of commanddir) {
 
-    var commandinfo = require("./commands/" + file).command
+    var commandinfo = require("./Commands/" + file).command
     commands.push({
         name: commandinfo.call,
         description: commandinfo.description,
