@@ -5,11 +5,13 @@ const client = new Client({intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_V
 module.exports.client = client;
 
 client.on('ready', () => {
-    console.log(`Logged in as ${client.user.tag}!`);
+    console.log(`[DISCORD] Logged in as ${client.user.tag}!`);
     //register commands
     require("./handleCommands")
   });
 
+//Database
+require("./database")
   
 client.on('interactionCreate', async interaction => {
     if (!interaction.isCommand()) return;
