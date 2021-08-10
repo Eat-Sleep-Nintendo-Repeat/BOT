@@ -11,7 +11,7 @@ app.get("/coins/:id", async (req, res) => {
     var mdb = await MEMBER.findOne({"id": req.params.id})
     if (!mdb) return res.send("DB INDEX not found")
     mdb.currencys.coins.log = mdb.currencys.coins.log.reverse()
-    var type = require("../modules/member-type-to-word")(mdb.type)
+    var type = require("../Modules/member-type-to-word")(mdb.type)
 
     
     res.render("CARD_coincard", {member: mdb, pb: mdb.informations.avatar, type})
@@ -23,7 +23,7 @@ app.get("/rank/:id", async (req, res) => {
     var mdb = await MEMBER.findOne({"id": req.params.id})
     if (!mdb) return res.send("DB INDEX not found")
     mdb.currencys.ranks.nextxp = mdb.currencys.ranks.rank * 5;
-    var type = require("../modules/member-type-to-word")(mdb.type)
+    var type = require("../Modules/member-type-to-word")(mdb.type)
 
     
     
@@ -43,7 +43,7 @@ app.get("/ranklist", async (req, res) => {
         var memberedit = m
 
             var nondbinformation = { 
-            tag: require("../modules/member-type-to-word")(m.type),
+            tag: require("../Modules/member-type-to-word")(m.type),
             place: rankdata.indexOf(m) + 1
          }
          
