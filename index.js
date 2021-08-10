@@ -1,4 +1,4 @@
-const { Client, Intents } = require('discord.js');
+const { Client, Intents, MessageEmbed, MessageButton, MessageActionRow } = require('discord.js');
 const config = require("./config.json")
 
 const client = new Client({intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_VOICE_STATES, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_MESSAGE_REACTIONS]})
@@ -15,5 +15,9 @@ require("./database")
 
 //Card Render Engine
 require("./webserver/webindex")
+
+//Events
+// require("./Events/welcome")
+require("./Events/accept_rules")
 
 client.login(config.discord.bot_token)
