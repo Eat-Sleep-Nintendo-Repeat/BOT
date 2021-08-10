@@ -1,3 +1,4 @@
+const { Permissions } = require('discord.js');
 exports.command = {
 	name: 'clear',
 	call: 'clear',
@@ -16,7 +17,7 @@ exports.command = {
         required: false
     }],
 
-    permission: ["MANAGE_MESSAGES"],
+    permission: [Permissions.FLAGS.MANAGE_MESSAGES],
 
 	async execute(interaction) {
         const {MessageEmbed} = require("discord.js")

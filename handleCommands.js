@@ -60,7 +60,7 @@ client.on('interactionCreate', async interaction => {
     //get command from storage
     try {
         var command = client.commands.get(interaction.commandName)
-        if (!interaction.member.permissions.has(command.permissions)) return await interaction.reply({ephemeral: true, embeds: [new Discord.MessageEmbed().setColor(config.colors.error).setTitle("Fehlende Berechtigung:").setDescription(`Für diesen Befehl benötigst du folgende Permissions:\n${command.permission.map(x => `• ${x}`).join("\n")}`)]})
+        if (!interaction.member.permissions.has(command.permission)) return await interaction.reply({ephemeral: true, embeds: [new Discord.MessageEmbed().setColor(config.colors.error).setTitle("Fehlende Berechtigung:").setDescription(`Für diesen Befehl benötigst du folgende Permissions:\n${command.permission.map(x => `• ${x}`).join("\n")}`)]})
         command.execute(interaction)
     } catch (error) {
         return await interaction.reply({ephemeral: false, embeds: [new Discord.MessageEmbed().setColor(config.colors.error).setTitle("Ein Fehler ist beim ausführen des Befehls aufgetreten:").setDescription(`${"```"}${error}${"```"}`)]})
