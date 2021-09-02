@@ -1,0 +1,100 @@
+.coincard {
+    display: grid;
+    grid-template-columns: repeat(6, "1fr");
+}
+
+.coincard .image {
+    grid-column: 0/1;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    height: 100vh;
+}
+
+.coincard .content {
+    grid-column: 2/7;
+}
+
+.coincard .image img {
+    background-color: var(--primary);
+    border-radius: 50%;
+    width: 27vw;
+}
+
+.coincard .content .name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.coincard .content .name h1 {
+    font-size: 12vh;
+    font-weight: bold;
+}
+
+.coincard .content .name p {
+    margin: 0 5px;
+    padding: 0 3px;
+    background-color: var(--primary);
+    border-radius: 4px;
+    font-size: 7vh;
+    font-weight: bold;
+}
+
+.coincard .content .name img {
+    width: 15vh;
+}
+
+.coincard .content .coins .amount {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.coincard .content .coins .amount h2 {
+    font-size: 9vh;
+}
+
+.coincard .content .coins .amount img {
+    width: 11vh
+}
+
+.coincard .content .coins .buchungen h4 {
+    font-size: 7vh;
+}
+
+.coincard .content .coins .buchungen ul {
+    list-style: none;
+}
+
+.coincard .content .coins .buchungen .buchung {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    text-align: center;
+}
+
+.coincard .content .coins .buchungen .buchung .description {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 30vw;
+}
+
+.coincard .content .coins .buchungen .value {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.coincard .content .coins .buchungen h5 {
+    font-size: 6vh;
+}
+
+.coincard .content .coins .buchungen .value img {
+    height: 8vh
+}

@@ -1,0 +1,34 @@
+:root{
+    --primary: #5865F2;
+    --success: #57F287;
+    --warning: #FEE75C;
+    --error:   #ED4245;
+    --special: #EB459E;
+    --background: #2C2F33;
+    --white: rgb(236, 236, 236);
+    /* https://discord.com/branding */
+  }
+    
+  * {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Cairo', sans-serif;
+    color: var(--white);
+    text-decoration: none;
+  }
+  
+  body {
+    background-color: var(--background);
+  }
+  
+  .flex {
+    display: flex;
+  }
+  
+  .box {
+    margin: 10px;
+    padding: 7px;
+    background-color: #1c1f22;
+    border-radius: 6px;
+  }

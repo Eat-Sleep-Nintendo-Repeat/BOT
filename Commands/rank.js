@@ -16,6 +16,8 @@ exports.command = {
 	async execute(interaction) {
         const Discord = require("discord.js")
         const puppeteer = require('puppeteer');
+        var path = require("path")
+        var config = require("../config.json")
         await interaction.deferReply({ ephemeral: false })
 
         //Making Screenshot
@@ -34,18 +36,15 @@ exports.command = {
             const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
             const page = await browser.newPage();
             page.setViewport(viewport)
-            await page.goto("http://localhost:7869/rank/" + user, {
+            await page.goto(`${path.resolve("card_rendering/rank.html")}?user=${user}&api_key=${config["eat-sleep-nintendo-repeat-api"].api_key}&base_url=${config["eat-sleep-nintendo-repeat-api"].base_url}`, {
                 waitUntil: 'networkidle0', // Wait until the network is idle
             });
             var screenshot = await page.screenshot();
-            const attachment = new Discord.MessageAttachment(screenshot, `Rankcard von ${user}.png`);
+            const attachment = new Discord.MessageAttachment(screenshot, `Coincard von ${user}.png`);
             interaction.editReply({files: [attachment]})
             
           
             await browser.close();
           })();
-
-
-
     },
 };

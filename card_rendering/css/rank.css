@@ -1,0 +1,78 @@
+.rankcard {
+    display: grid;
+    grid-template-columns: repeat(6, "1fr");
+}
+
+.rankcard .image {
+    grid-column: 0/1;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    height: 100vh;
+}
+
+.rankcard .content {
+    grid-column: 2/7;
+}
+
+.rankcard .image img {
+    background-color: var(--primary);
+    border-radius: 50%;
+    width: 27vw;
+}
+
+.rankcard .content .name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rankcard .content .name h1 {
+    font-size: 15vh;
+    font-weight: bold;
+}
+
+.rankcard .content .name p {
+    margin: 0 5px;
+    padding: 0 3px;
+    background-color: var(--primary);
+    border-radius: 4px;
+    font-size: 7vh;
+    font-weight: bold;
+}
+
+.rankcard .content .name img {
+    width: 15vh;
+}
+
+.rankcard .content .rankcard .rank {
+    display: flex;
+    justify-content: center;
+}
+
+.rankcard .content .rankcard .rank h1{
+    font-size: 18vh;
+    margin: 0 10px;
+}
+
+.rankcard .content .rankcard .xp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.rankcard .content .rankcard .xp .xpprogress {
+    width: 40vw;
+    background-color: var(--white);
+    border-radius: 4px;
+    margin: 0 10px;
+}
+
+.rankcard .content .rankcard .xp .xpprogress .bar {
+  height: 10px;
+  background-color: var(--primary);
+  border-radius: 4px;
+}

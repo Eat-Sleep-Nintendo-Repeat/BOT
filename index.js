@@ -13,9 +13,6 @@ client.on('ready', () => {
 //Database
 require("./database")
 
-//Card Render Engine
-require("./webserver/webindex")
-
 //Events
 require("./Events/welcome")
 require("./Events/accept_rules")
