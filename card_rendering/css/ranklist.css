@@ -1,0 +1,74 @@
+.ranklistcard .head {
+display: flex;
+justify-content: center;
+text-align: center;
+align-items: center;
+}
+.ranklistcard .head #date {
+margin: 0 10px;
+font-size: 20px;
+background-color: var(--special);
+padding: 0 10px;
+border-radius: 6px;
+}
+
+.first {
+    background-color: rgb(139, 119, 0);
+}
+
+.second {
+    background-color: rgb(97, 97, 97);
+}
+
+.third {
+    background-color: rgb(160, 79, 50);
+}
+
+.ranklistcard .list .user {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+}
+
+.place i {
+    /* Medilien der ersten Plätze */
+    font-size: 5vh;
+}
+
+.ranklistcard .list .user .name  {
+display: flex;
+/* justify-content: center; */
+align-items: center;
+text-align: center;
+}
+
+.ranklistcard .list .user .name h1 {
+    white-space: nowrap;
+}
+
+.ranklistcard .list .user .name .pb  {
+width: 5vh;
+background-color: var(--primary);
+border-radius: 50%;
+margin: 0 10px;
+}
+
+.ranklistcard .list .user h1  {
+font-size: 3vh;
+}
+
+.ranklistcard .list .user .name p  {
+margin: 0 5px;
+padding: 0 3px;
+background-color: var(--primary);
+border-radius: 4px;
+font-size: 2vh;
+font-weight: bold;
+}
+
+.ranklistcard .list .user .name #boosterbadge  {
+width: 4vh;
+}
+
+.ranklistcard .list .user .rank h1 {
+    text-align: right;
+}
