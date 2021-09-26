@@ -14,6 +14,10 @@ client.on('ready', () => {
 //Database
 require("./database")
 
+//Socket
+require("./Modules/socketio")
+require("./Modules/socket events")
+
 //Events
 var commanddir = fs.readdirSync('./Events').filter(file => file.endsWith('.js'));
 for (const file of commanddir) {
