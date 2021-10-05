@@ -59,7 +59,8 @@
 }
 
 .coincard .content .coins .amount img {
-    width: 11vh
+    width: 11vh;
+    margin: 0 3px;
 }
 
 .coincard .content .coins .buchungen h4 {
@@ -96,5 +97,6 @@
 }
 
 .coincard .content .coins .buchungen .value img {
-    height: 8vh
+    height: 8vh;
+    margin: 0 3px;
 }

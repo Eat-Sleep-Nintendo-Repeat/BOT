@@ -20,7 +20,7 @@ window.onload = () => {
         <div class="buchung">
             <div class="value">
                 <h5 style="color: ${x.value < 0 ? `var(--error)` : `var(--success)`};">${x.value}</h5>
-                <img src="images/esc.png" alt="Coins">
+                <img src="images/Eat Sleep Coin.svg" alt="Coins">
             </div>
 
             <h5 class="description">${x.description}</h5>
