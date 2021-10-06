@@ -1,7 +1,6 @@
 const { MessageEmbed } = require("discord.js")
 var {client} = require("../index")
 var MEMBER = require("../Models/MEMBER")
-var WARNS = require("../Models/WARNS")
 
 client.on("guildMemberAdd", async (member) => {
     var memberdb = await MEMBER.findOne({"id": member.id})
@@ -32,7 +31,6 @@ client.on("guildMemberAdd", async (member) => {
 
 client.on("guildMemberRemove", async (member) => {
     var memberdb = await MEMBER.findOne({"id": member.id})
-    var warndb = await WARNS.find({"victim": member.id})
 
        var leaveemoji  = client.emojis.cache.get("723485426169413686") //#ff5757
 
@@ -46,7 +44,6 @@ client.on("guildMemberRemove", async (member) => {
         delete_date.setHours(delete_date.getHours() + 1)
         if (memberdb.type > 0) delete_date.setMonth(delete_date.getMonth() + 3) // add 3 Months if member accepted the rules
         if (memberdb.currencys.ranks.rank > 15) delete_date.setMonth(delete_date.getMonth() + 3) //add another 3 months if member has a Level of 15 or higher
-        delete_date.setMonth(delete_date.getMonth() + (warndb.length * 4)) //add 2 Months for every warning the Member has resived
         if (memberdb.usemyvoice.accepted == true && memberdb.usemyvoice.date > delete_date) delete_date = memberdb.usemyvoice.date //if the use my voice one year panelty is bigger then the delte date > set the use my voice panelty as delte date
 
         if (member.user.bot) return await MEMBER.findOneAndDelete({id: member.id})
