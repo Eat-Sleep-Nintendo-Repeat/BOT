@@ -23,7 +23,7 @@ client.on("messageCreate", (message) => {
             });
 
             await MEMBER.findOneAndUpdate(
-                { id: doc.id },
+                { id: message.author.id },
                 {
                 "currencys.coins.amount": doc.currencys.coins.amount + 300,
                 "currencys.coins.log": doc.currencys.coins.log,
@@ -35,22 +35,26 @@ client.on("messageCreate", (message) => {
     }
 
     //check last message if disboard awnsered really fast
-    message.channel.messages.fetch({after: message.id, around: message.id}).then(messages => {
-        if (messages.first() != null) {
-            valid_bump_check(messages.first())
-        }
-    })
-
-    //if no message of disboard has arrived yet, wait for it
-    const filter = m => m.author.id === "302050872383242240";
-    message.channel.awaitMessages(filter, {max: 1, time: 60000, errors: ["time"]}).then(async collected => {
-
-        valid_bump_check(collected.first())
-
-
-    }).catch(() => {
-        clearInterval(sendpost)
-        message.channel.send("Bump fehlgeschlagen...")
-    })
+    setTimeout(() => {
+        message.channel.messages.fetch({after: message.id, around: message.id}).then(messages => {
+            if (messages.first() != null && messages.first().author.id === "302050872383242240") {
+                valid_bump_check(messages.first())
+            }
+            else {
+        //if no message of disboard has arrived yet, wait for it
+        const filter = m => m.author.id === "302050872383242240";
+        message.channel.awaitMessages(filter, {max: 1, time: 60000, errors: ["time"]}).then(async collected => {
+    
+            valid_bump_check(collected.first())
+    
+    
+        }).catch(() => {
+            clearInterval(sendpost)
+            message.channel.send("Bump ermittlung fehlgeschlagen...")
+        })
+            }
+        })
+    }, 500);
+    
 })
 
