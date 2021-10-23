@@ -20,9 +20,9 @@ client.on("voiceStateUpdate", (oldState, newState) => {
         if (valid === false) {
             newState.member.voice.setChannel(null)
             newState.member.send({embeds: [
-                new MessageEmbed().setColor(config.colors.warning).setTitle("ACHTUNG").setDescription("Du hast soeben versucht einem Voice Channel zu joinen, in dem aktuell deine Stimme aufgenommen, oder sogar gestreamt werden könnte. Wenn du trotzdem mitmachen möchtest, musst du erst unsere __Einverständniserklärung zur Nutzung von Stimmenaufnahmen__ akzeptieren. Unser FAQ, mehr Informationen und das Formular zum akzeptieren welches dich maximal 2 Minuten beschäftigen sollte, findest du [hier](https://app.eat-sleep-nintendo-repeat.eu/home/usemyvoice) oder beim Button unter dieser Message")
+                new MessageEmbed().setColor(config.colors.warning).setTitle("ACHTUNG").setDescription("Du hast soeben versucht einem Voice Channel zu joinen, in dem aktuell deine Stimme aufgenommen, oder sogar gestreamt werden könnte. Wenn du trotzdem mitmachen möchtest, musst du erst unsere __Einverständniserklärung zur Nutzung von Stimmenaufnahmen__ akzeptieren. Unser FAQ, mehr Informationen und das Formular zum akzeptieren welches dich maximal 2 Minuten beschäftigen sollte, findest du [hier](https://ui.eat-sleep-nintendo-repeat.eu/home/usemyvoice) oder beim Button unter dieser Message")
             ],
-            components: [new MessageActionRow().addComponents(new MessageButton().setStyle("LINK").setURL("https://app.eat-sleep-nintendo-repeat.eu/home/usemyvoice").setLabel("Zur Einverständniserklärung"))]})
+            components: [new MessageActionRow().addComponents(new MessageButton().setStyle("LINK").setURL("https://ui.eat-sleep-nintendo-repeat.eu/home/usemyvoice").setLabel("Zur Einverständniserklärung"))]})
         }
 
         }).catch(e => {
