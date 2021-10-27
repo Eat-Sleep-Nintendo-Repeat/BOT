@@ -3,7 +3,7 @@ var config = require("../config.json")
 
 axios.interceptors.request.use(
     (conf) => {
-        conf.headers["Authorization"] = `Token ${config["eat-sleep-nintendo-repeat-api"].api_key}`;
+        conf.headers["Authentication"] = `Token ${config["eat-sleep-nintendo-repeat-api"].api_key}`;
         return conf;
     },
     (error) => {
