@@ -28,7 +28,7 @@ exports.command = {
             const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
             const page = await browser.newPage();
             page.setViewport(viewport)
-            await page.goto(`${path.resolve("card_rendering/ranklist.html")}?api_key=${config["eat-sleep-nintendo-repeat-api"].api_key}&base_url=${config["eat-sleep-nintendo-repeat-api"].base_url}`, {
+            await page.goto(`file:///${path.resolve("card_rendering/ranklist.html")}?api_key=${config["eat-sleep-nintendo-repeat-api"].api_key}&base_url=${config["eat-sleep-nintendo-repeat-api"].base_url}`, {
                 waitUntil: 'networkidle0', // Wait until the network is idle
             });
             var screenshot = await page.screenshot();

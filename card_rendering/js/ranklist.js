@@ -3,7 +3,7 @@ window.onload = () => {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
 
-    fetch(params.base_url + `/users/toplist?max=15`, {headers: {Authorization: `Token ${params.api_key}`}}).then(res => res.json()).then(data => {
+    fetch(params.base_url + `/users/toplist?max=15`, {headers: {Authentication: `Token ${params.api_key}`}}).then(res => res.json()).then(data => {
         console.log(data)
 
         document.getElementById("date").innerHTML = new window.Date().toLocaleDateString("DE-de")

@@ -3,7 +3,7 @@ window.onload = () => {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const params = Object.fromEntries(urlSearchParams.entries());
 
-    fetch(params.base_url + `/users/${params.user}`, {headers: {Authorization: `Token ${params.api_key}`}}).then(res => res.json()).then(data => {
+    fetch(params.base_url + `/users/${params.user}`, {headers: {Authentication: `Token ${params.api_key}`}}).then(res => res.json()).then(data => {
         console.log(data)
 
         document.getElementById("profile_image").setAttribute("src", `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png?size=2048`)
