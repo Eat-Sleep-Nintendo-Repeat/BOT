@@ -34,7 +34,6 @@ exports.command = {
 
 
         (async () => {
-            console.log(`${path.resolve("card_rendering/rank.html")}?user=${user}&api_key=${config["eat-sleep-nintendo-repeat-api"].api_key}&base_url=${config["eat-sleep-nintendo-repeat-api"].base_url}`)
             const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
             const page = await browser.newPage();
             page.setViewport(viewport)
