@@ -15,7 +15,7 @@ exports.command = {
             interaction.editReply("done")
         }
         else {
-            interaction.editReply("Bist nicht in nem Talk")
+            interaction.editReply("Du befindest dich aktuell nicht in einem Talk")
         }
       
     },
