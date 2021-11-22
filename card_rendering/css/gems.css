@@ -1,9 +1,9 @@
-.coincard {
+.gemcard {
     display: grid;
     grid-template-columns: repeat(6, "1fr");
 }
 
-.coincard .image {
+.gemcard .image {
     grid-column: 0/1;
     display: flex;
     text-align: center;
@@ -13,28 +13,28 @@
     height: 100vh;
 }
 
-.coincard .content {
+.gemcard .content {
     grid-column: 2/7;
 }
 
-.coincard .image img {
+.gemcard .image img {
     background-color: var(--primary);
     border-radius: 50%;
     width: 27vw;
 }
 
-.coincard .content .name {
+.gemcard .content .name {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.coincard .content .name h1 {
+.gemcard .content .name h1 {
     font-size: 12vh;
     font-weight: bold;
 }
 
-.coincard .content .name p {
+.gemcard .content .name p {
     margin: 0 5px;
     padding: 0 3px;
     background-color: var(--primary);
@@ -43,60 +43,60 @@
     font-weight: bold;
 }
 
-.coincard .content .name img {
+.gemcard .content .name img {
     width: 15vh;
 }
 
-.coincard .content .coins .amount {
+.gemcard .content .gems .amount {
     display: flex;
     justify-content: center;
     text-align: center;
     align-items: center;
 }
 
-.coincard .content .coins .amount h2 {
+.gemcard .content .gems .amount h2 {
     font-size: 9vh;
 }
 
-.coincard .content .coins .amount img {
+.gemcard .content .gems .amount img {
     width: 11vh;
     margin: 0 3px;
 }
 
-.coincard .content .coins .buchungen h4 {
+.gemcard .content .gems .buchungen h4 {
     font-size: 7vh;
 }
 
-.coincard .content .coins .buchungen ul {
+.gemcard .content .gems .buchungen ul {
     list-style: none;
 }
 
-.coincard .content .coins .buchungen .buchung {
+.gemcard .content .gems .buchungen .buchung {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     align-items: center;
     text-align: center;
 }
 
-.coincard .content .coins .buchungen .buchung .description {
+.gemcard .content .gems .buchungen .buchung .description {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
     max-width: 30vw;
 }
 
-.coincard .content .coins .buchungen .value {
+.gemcard .content .gems .buchungen .value {
     display: flex;
     align-items: center;
     text-align: center;
     justify-content: center;
 }
 
-.coincard .content .coins .buchungen h5 {
+.gemcard .content .gems .buchungen h5 {
     font-size: 6vh;
 }
 
-.coincard .content .coins .buchungen .value img {
+.gemcard .content .gems .buchungen .value img {
     height: 8vh;
     margin: 0 3px;
 }

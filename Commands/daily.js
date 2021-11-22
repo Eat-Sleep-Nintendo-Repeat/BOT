@@ -12,8 +12,8 @@ exports.command = {
         await interaction.deferReply({ ephemeral: false })
 
         //fetch api for daily
-        axios.post(baseURL + `/coins/${interaction.member.id}/daily`).then(res => {
-            interaction.editReply({embeds: [new MessageEmbed().setColor(config.colors.success).setTitle("Daily erfolgreich!").setDescription("Deine täglichen 150 coins wurden eingelöst")]})
+        axios.post(baseURL + `/gems/${interaction.member.id}/daily`).then(res => {
+            interaction.editReply({embeds: [new MessageEmbed().setColor(config.colors.success).setTitle("Daily erfolgreich!").setDescription("Deine täglichen 150 <:EatSleepGem:912393376769376297> wurden geclaimt")]})
         }).catch(e => {
             if (e.response && e.response.data.message){
                 if (e.response.data.tryagain) { //Daily not ready

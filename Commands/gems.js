@@ -1,12 +1,12 @@
 exports.command = {
-	name: 'coins',
-	call: 'coins',
-	description: 'Ein Befehl, der den eigenen Coinstate als image postet',
+	name: 'gems',
+	call: 'gems',
+	description: 'Ein Befehl, der den eigenen Gemstate als image postet',
 
     options: [
     {
         name: "user",
-        description: "User dessen Coins abgefragt werden soll",
+        description: "User dessen Gems abgefragt werden soll",
         type: 6,
         required: false
     }],
@@ -40,8 +40,8 @@ exports.command = {
                 waitUntil: 'networkidle0', // Wait until the network is idle
             });
             var screenshot = await page.screenshot();
-            const attachment = new Discord.MessageAttachment(screenshot, `Coincard von ${user}.png`);
-            interaction.editReply({files: [attachment], embeds: [new Discord.MessageEmbed().setDescription("Bitte beachte, das dieser Befehl zu \"/gems\" umbenannt wurde und \"/coins\" daher bald nicht mehr verfügbar sein wird! [Hier mehr dazu](https://github.com/Eat-Sleep-Nintendo-Repeat/API/issues/1)")]})
+            const attachment = new Discord.MessageAttachment(screenshot, `Gemcard von ${user}.png`);
+            interaction.editReply({files: [attachment]})
             
           
             await browser.close();
