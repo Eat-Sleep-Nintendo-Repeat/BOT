@@ -24,7 +24,7 @@ exports.command = {
                     return interaction.editReply({embeds: [new MessageEmbed().setColor(config.colors.error).setTitle("API Error").setDescription(`Du hast deine tägliche Belohnung bereits eingelöst...\nVersuche es am ${new Date(e.response.data.tryagain).toLocaleDateString("DE-de")} um ${new Date(e.response.data.tryagain).toLocaleTimeString("DE-de")} Uhr erneut`)]})
                 }
                 else { //something went wrong by api
-                    return interaction.editReply({embeds: [new MessageEmbed().setColor(config.colors.error).setTitle("API Error").setDescription(e.data.response.message)]})
+                    return interaction.editReply({embeds: [new MessageEmbed().setColor(config.colors.error).setTitle("API Error").setDescription(e.response.data.message)]})
                 }
             }
             else {
