@@ -14,11 +14,23 @@ window.onload = () => {
             document.getElementById("boosterbadge").setAttribute("style", "display: block;")
         }
 
+        if (data.private_page == false) {
+
         document.getElementById("rank").innerHTML = data.currencys.ranks.rank
         document.getElementById("xpprogress").innerHTML = `${data.currencys.ranks.xp} / ${data.currencys.ranks.rank * 5}`
 
         document.getElementById("xpbar").setAttribute("style", `width: ${data.currencys.ranks.xp / (data.currencys.ranks.rank * 5) * 100}%`)
+        }
 
+        else {
+            document.getElementById("rank").innerHTML = `Geheim`
+            document.getElementById("xpprogress").style = `display: none`
+            document.getElementById("xpprogress").style = `display: none`
+            document.querySelector("h4").innerHTML = `${data.username}'s Rang wird vor anderen verborgen`
+            document.querySelector(".xp").style = "display: none"
+    
+            document.getElementById("xpbar").setAttribute("style", `display: none`)
+        }
 
         
     })
