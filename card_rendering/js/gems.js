@@ -30,7 +30,7 @@ window.onload = () => {
     )).join("")
 
 
-    if (data.gemdata.log.length == 0) {
+    if (data.currencys.gems.log.length == 0) {
         document.getElementById("list").innerHTML =`<li>
         <div class="buchung">
             <div class="value">
