@@ -10,19 +10,6 @@ const MemberSchema = mongoose.Schema({
     ranks: {
       rank: { type: Number, default: 1 },
       xp: { type: Number, default: 0 },
-      notify: { type: Boolean, default: false },
-    },
-    coins: {
-      amount: { type: Number, default: 300 },
-      log: Array,
-      purchases: [
-        {
-          id: Number,
-          date: { type: Date, default: new Date() },
-          active: { type: Boolean, default: true },
-        },
-      ],
-      last_daily: { type: Date, default: null },
     },
     gems: {
       amount: { type: Number, default: 300 },
@@ -38,7 +25,6 @@ const MemberSchema = mongoose.Schema({
     },
   },
   
-  statistics: {},
   oauth: {
     access_token: { default: null, type: String },
     refresh_token: String,
@@ -51,6 +37,11 @@ const MemberSchema = mongoose.Schema({
       date: Date,
       reason: String,
     },
+  },
+
+  settings: {
+    levelup_notify: {type: Boolean, default: false},
+    page_private: {type: Boolean, default: false}
   },
 
   usemyvoice: {
