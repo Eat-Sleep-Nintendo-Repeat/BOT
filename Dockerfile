@@ -29,10 +29,10 @@ COPY . .
 
 #TAEFIK CONFIG
 LABEL traefik.enable="true" \
-      traefik.http.routers.esnr-auth.entrypoints="websecure" \
-      traefik.http.routers.esnr-auth.rule="Host(`eat-sleep-nintendo-repeat.eu`) && PathPrefix(`/api/botuptime`)" \
+      traefik.http.routers.esnr-bot.entrypoints="websecure" \
+      traefik.http.routers.esnr-bot.rule="Host(`eat-sleep-nintendo-repeat.eu`) && PathPrefix(`/api/botuptime`)" \
       traefik.port="7811" \
-      traefik.http.routers.esnr-auth.tls.certresolver="letsencrypt"
+      traefik.http.routers.esnr-bot.tls.certresolver="letsencrypt"
 
 EXPOSE 7811
 
