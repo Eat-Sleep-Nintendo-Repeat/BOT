@@ -18,9 +18,6 @@ require("./database")
 require("./Modules/socketio")
 require("./Modules/socket events")
 
-//uptimerobot_webserver
-require("./Modules/uptime_webserver")
-
 //Events
 var commanddir = fs.readdirSync('./Events').filter(file => file.endsWith('.js'));
 for (const file of commanddir) {
