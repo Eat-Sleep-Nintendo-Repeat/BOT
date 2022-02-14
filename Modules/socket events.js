@@ -5,7 +5,7 @@ const { MessageEmbed } = require("discord.js")
 const SHOP_ARTIKEL = require("../Models/SHOP-ARTIKEL")
 
 //post message in log channel
-socket.on("log", (data) => {
+socket.on("logm", (data) => {
     var Embed = new MessageEmbed()
     if (data.color){Embed.setColor(data.color)}
     if (data.title){Embed.setTitle(data.title)}
@@ -15,7 +15,7 @@ socket.on("log", (data) => {
     client.channels.cache.get("644283425389412357").send({embeds: [Embed]})
 })
 
-socket.on(`log_330380702505762817`, (data) => {
+socket.on(`log`, (data) => {
     console.log("[SOCKET.IO LOG-CHANNEL] " + `${data.message ? data.message : data.error}`)
 })
 
@@ -84,4 +84,8 @@ socket.on("shop_deactivate", async ({oid, user, item}) => {
         socket.emit(`shop_confirmation_${oid}`, {successfull: true})
     } catch (error) {console.log(error)}
 
+})
+
+socket.on("uptime", (data) => {
+    socket.emit("uptime_" + data.oid, {})
 })
