@@ -4,8 +4,15 @@ var MEMBER = require("../Models/MEMBER")
 
 client.on("guildMemberAdd", async (member) => {
     var memberdb = await MEMBER.findOne({"id": member.id})
-    var type = 0;
+    var type = 1;
     if (member.user.bot) type = 50
+    if (type === 1) {
+        // add member role
+        member.roles.add("948288542075924600")
+    }
+    else {
+        member.roles.add("948307247233122335")
+    }
 
     var joinemoji   = client.emojis.cache.get("723485426144378913"), //#77b800
         rejoinemoji = client.emojis.cache.get("723487019241701477")//#00c2cb
