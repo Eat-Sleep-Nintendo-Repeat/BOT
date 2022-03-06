@@ -8,7 +8,6 @@ const { Permissions } = require('discord.js');
 client.on("ready", () => {
     setTimeout(() => {
         client.guilds.cache.get("585511241628516352").channels.cache.get("736589204015808602").children.forEach(v => {
-            console.log(v.name)
             if (v.id === "950002659237183508") return;
 
             if (v.members.toJSON().length === 0) {
