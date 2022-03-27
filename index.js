@@ -2,7 +2,11 @@ const { Client, Intents, MessageEmbed, MessageButton, MessageActionRow } = requi
 const config = require("./config.json")
 const fs = require("fs")
 
-const client = new Client({intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_VOICE_STATES, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_PRESENCES]})
+const client = new Client({
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_VOICE_STATES, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_PRESENCES],
+  partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
+  retryLimit: 5
+})
 module.exports.client = client;
 
 client.on('ready', () => {
@@ -24,4 +28,4 @@ for (const file of commanddir) {
 require("./Events/" + file)
 }
 
-client.login(config.discord.bot_token)
+client.login(config.discord.bot_token);
