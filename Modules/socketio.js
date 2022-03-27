@@ -8,7 +8,7 @@ const socket = io(config["eat-sleep-nintendo-repeat-api"].socket_url + `?Authent
 
 socket.on("connect_error", (e) => {
     // console.log(e)
-    console.log("[SOCKEt.IO] " + e.message)
+    console.log("[SOCKET.IO] " + e.message)
 })
 
 socket.on("connect", () => {
