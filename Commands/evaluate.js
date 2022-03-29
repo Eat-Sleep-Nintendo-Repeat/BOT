@@ -1,4 +1,5 @@
 const { Permissions } = require('discord.js');
+const {client} = require("../index")
 exports.command = {
 	name: 'evaluate',
 	call: 'eval',
@@ -14,6 +15,9 @@ exports.command = {
     permission: [Permissions.FLAGS.MANAGE_GUILD],
 
 	async execute(interaction) {
+        const message = interaction.message;
+        const guild = message.guild;
+        const channel = interaction.channel;
         const {MessageEmbed} = require("discord.js")
         const config = require("../config.json")
 
