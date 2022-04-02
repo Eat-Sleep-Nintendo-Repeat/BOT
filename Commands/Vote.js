@@ -103,7 +103,7 @@ exports.command = {
         })
 
         //reply interaction
-        interaction.reply("Abstimmung erstellt!")
+        interaction.reply("Abstimmung erstellt!", { ephemeral: true })
 
 
 
@@ -112,7 +112,7 @@ exports.command = {
         //get vote from Database
         VOTE.findOne({_id: interaction.options.get("id").value}, (err, vote) => {
             if (err) {
-                interaction.reply("Fehler beim Abrufen der Abstimmung")
+                interaction.reply("Fehler beim Abrufen der Abstimmung", { ephemeral: true })
             } else if (vote) {
                 //end vote
                 vote.closingAt = new Date()
@@ -127,9 +127,9 @@ exports.command = {
                         message.edit(votemessagebuilder(vote, true))
                     })
                 })
-                interaction.reply("Abstimmung beendet!")
+                interaction.reply("Abstimmung beendet!", { ephemeral: true })
             } else {
-                interaction.reply("Abstimmung nicht gefunden!")
+                interaction.reply("Abstimmung nicht gefunden!", { ephemeral: true })
             }
         })
     
