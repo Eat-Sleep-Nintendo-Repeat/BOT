@@ -39,12 +39,6 @@ exports.command = {
                             required: false,
                             min_value: 2
                         },
-                        {
-                            name: "endtime",
-                            description: "Zeit, ab wann die Abstimmung endet. Format: DD.MM.YYYY HH:MM:SS",
-                            type: 3,
-                            required: false
-                        },
                     ]
                 },
                 {
@@ -72,12 +66,12 @@ exports.command = {
         const question = interaction.options.get("question").value
         const answers = interaction.options.get("answers").value.split("|")
 
+
         //create Vote in Database
         const vote = new VOTE({
             question: question,
             answers: answers.map(answer => {return {answer: answer, votes: 0, id: nanoid(5), order: answers.indexOf(answer)}}),
             createdAt: new Date(),
-            closingAt: interaction.options.get("endtime") ? new Date(interaction.options.get("endtime").value) : null,
             voted_users: []
         })
 
@@ -103,7 +97,7 @@ exports.command = {
         })
 
         //reply interaction
-        interaction.reply("Abstimmung erstellt!", { ephemeral: true })
+        interaction.reply({ ephemeral: true, content: "Abstimmung erstellt!" })
 
 
 
@@ -112,7 +106,7 @@ exports.command = {
         //get vote from Database
         VOTE.findOne({_id: interaction.options.get("id").value}, (err, vote) => {
             if (err) {
-                interaction.reply("Fehler beim Abrufen der Abstimmung", { ephemeral: true })
+                interaction.reply({ ephemeral: true, content: "Fehler beim Beenden der Abstimmung!" })
             } else if (vote) {
                 //end vote
                 vote.closingAt = new Date()
@@ -127,9 +121,9 @@ exports.command = {
                         message.edit(votemessagebuilder(vote, true))
                     })
                 })
-                interaction.reply("Abstimmung beendet!", { ephemeral: true })
+                interaction.reply({ ephemeral: true, content: "Abstimmung beendet!" })
             } else {
-                interaction.reply("Abstimmung nicht gefunden!", { ephemeral: true })
+                interaction.reply({ ephemeral: true, content: "Abstimmung nicht gefunden!" })
             }
         })
     

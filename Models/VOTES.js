@@ -15,7 +15,7 @@ const Schema = mongoose.Schema({
     channel: {type: String},
 
     createdAt: {type: Date, default: Date.now()},
-    closingAt: {type: Date}
+    closingAt: Date
 })
 
 module.exports = mongoose.model("vote", Schema)

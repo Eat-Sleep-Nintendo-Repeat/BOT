@@ -75,11 +75,6 @@ module.exports =  function VoteMessageBuilder(vote, endversion) {
 
         embed.setDescription(vote.answers.map(answer => `${intToEmoji(vote.answers.indexOf(answer) + 1, false)} ${answer.answer} \` ${answer.votes} (${votesInPercent(answer.votes)}) \``).join("\n\n"));
 
-        //if endtime add to embed
-        if (vote.closingAt) {
-            embed.setFooter(embed.footer.text + "\nAbstimmung endet am: " + vote.closingAt.toLocaleString());
-        }
-
         embed.setFooter(embed.footer.text + "\nDu hast nur eine Stimme!")
 
         //add min and max votes to footer if its set and not 0
