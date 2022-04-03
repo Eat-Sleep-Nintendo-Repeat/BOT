@@ -13,9 +13,9 @@ exports.command = {
         await interaction.deferReply({ ephemeral: false })
 
         // fetch api for daily
-        axios.post(baseURL + `/gems/${interaction.member.id}/daily`).then(res => {
+        axios.post(baseURL + `/gems/${interaction.member.id}/daily`).then(async res => {
             
-            const Gemoji = client.emojis.cache.find(emoji => emoji.id === "912393376769376297");
+            const Gemoji = await client.guilds.cache.get("604747271862485012").emojis.fetch("912393376769376297")
             interaction.editReply({embeds: [new MessageEmbed().setColor(config.colors.success).setTitle("Daily erfolgreich!").setDescription(`Deine täglichen 150 ${Gemoji} wurden geclaimt`)]})
     
             }).catch(e => {
