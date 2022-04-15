@@ -16,7 +16,7 @@ window.onload = () => {
                     </div>
 
                     <div class="name">
-                        <img class="pb" onerror="this.src='images/default-pb.jpg';" src="https://cdn.discordapp.com/avatars/${x.id}/${x.avatar}.png?size=2048">
+                        <img class="pb" onerror="this.src='images/default-pb.jpg';" src="${x.avatar}">
                         <h1>${x.username}#${x.discriminator}</h1>
                         <p>${x.typeword}</p>
                         <img id="boosterbadge" style="display: ${x.serverbooster ? "block" : "none"};" src="images/nitro.png" alt="booster image">

@@ -6,7 +6,7 @@ window.onload = () => {
     fetch(params.base_url + `/users/${params.user}`, {headers: {Authentication: `Token ${params.api_key}`}}).then(res => res.json()).then(data => {
         console.log(data)
 
-        document.getElementById("profile_image").setAttribute("src", `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png?size=2048`)
+        document.getElementById("profile_image").setAttribute("src", `${data.avatar}`)
         document.getElementById("name").innerHTML = `${data.username}#${data.discriminator}`
         document.getElementById("typename").innerHTML = data.typeword
 
