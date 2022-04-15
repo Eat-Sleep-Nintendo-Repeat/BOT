@@ -21,7 +21,7 @@ client.on("guildMemberAdd", async (member) => {
     if (!memberdb){
         await new MEMBER({
             id: member.id,
-            informations: {name: member.user.username, discriminator: member.user.discriminator, avatar: member.user.avatar},
+            informations: {name: member.user.username, discriminator: member.user.discriminator, avatar: member.user.avatarURL()},
             type: type
         }).save()
         if (type == 50) return;

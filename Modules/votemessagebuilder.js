@@ -126,7 +126,7 @@ module.exports =  function VoteMessageBuilder(vote, endversion) {
         embed.setDescription(vote.answers.map(answer => 
             `${vote.answers.indexOf(answer) === 0 ? "**👑" : ""}
             ${intToEmoji(answer.order + 1, false)} ${answer.answer} \` ${answer.votes} (${votesInPercent(answer.votes)}) \`
-            ${vote.answers.indexOf(answer) === 0 ? "**" : ""}`).join("\n\n"));
+            ${vote.answers.indexOf(answer) === 0 ? "**" : ""}`).join(""));
 
         // add all answers to interaction
         interaction.components[0].addOptions(vote.answers.map(answer =>( {
