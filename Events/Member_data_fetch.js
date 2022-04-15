@@ -5,7 +5,7 @@ var IMAGE_STORE = require("../Models/IMAGESTORE");
 var fetch = require("node-fetch");
 const { nanoid } = require("nanoid");
 
-schedule.scheduleJob("20 */08 * * * *", async function () {
+schedule.scheduleJob("*/30 * * * *", async function () {
     var dbmember = await MEMBER.find({});
     client.guilds.cache.get("585511241628516352").members.cache.forEach(async member => {
         var databasemember = dbmember.find(x => x.id == member.id);
