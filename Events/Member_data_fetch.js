@@ -28,7 +28,8 @@ schedule.scheduleJob("*/30 * * * *", async function () {
                 date: new Date(),
               });
               await imagenew.save();
-            } else {
+            } 
+            else {
               //update image buffer to image store
               image.image = buffer;
               image.filename = member.user.displayAvatarURL({ format: "png", dynamic: true, size: 1024 }).split("/").pop();
