@@ -294,12 +294,12 @@ client.on("interactionCreate", (interaction) => {
 //play command youtube search autocomplete
 client.on("interactionCreate", (interaction) => {
     if (!interaction.isAutocomplete()) return;
-    if (!["play", "playtop"].indexOf(interaction.options._subcommand)) return;
+    if (!interaction.options._subcommand.startsWith("play")) return;
 
     //Serch Youtube Term per Youtube API
     const search = require("yt-search");
     search({query: interaction.options.get("url_or_search").value, }, function (err, results) {
-        if (err || !results) return interaction.respond();
+        if (err || !results) return interaction.respond([]);
 
         interaction.respond(results.videos.slice(0, 10).map(video => ({name: video.title, value: video.url})));
     })
