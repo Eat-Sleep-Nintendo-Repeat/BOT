@@ -1,6 +1,7 @@
 const { Client, Intents, MessageEmbed, MessageButton, MessageActionRow } = require('discord.js');
 const config = require("./config.json")
 const fs = require("fs")
+const { Manager } = require("@lavacord/discord.js");
 
 const client = new Client({
   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_VOICE_STATES, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_PRESENCES],
@@ -9,11 +10,19 @@ const client = new Client({
 })
 module.exports.client = client;
 
-client.on('ready', () => {
-    console.log(`[DISCORD] Logged in as ${client.user.tag}!`);
-    //register commands
-    require("./handleCommands")
-  });
+//Lavacord
+const manager = new Manager(client, config.lavacord.nodes);
+module.exports.musicmanager = manager;
+
+client.on('ready', async () => {
+
+  await manager.connect();
+  console.log(`Logged in as ${client.user.tag}!`);
+  console.log(`[DISCORD] Logged in as ${client.user.tag}!`);
+  //register commands
+  require("./handleCommands")
+  
+});
 
 //Database
 require("./database")
