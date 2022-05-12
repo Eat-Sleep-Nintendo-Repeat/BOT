@@ -284,8 +284,12 @@ client.on("interactionCreate", (interaction) => {
         break;
     }
 
-        //edit controller message
-        interaction.update(require("../Modules/musicmessagebuilder")(Musicdata[interaction.guild.id]));
+        if (interaction.customId.replace("music_", "") == "skip" || interaction.customId.replace("music_", "") == "back") {
+            interaction.deferUpdate();
+        }
+        else {
+            interaction.update(require("../Modules/musicmessagebuilder")(Musicdata[interaction.guild.id]));
+        }
         
        
         
