@@ -312,6 +312,7 @@ client.on("interactionCreate", (interaction) => {
 
 //sticky checker
 client.on("voiceStateUpdate", (oldMember, newMember) => {
+    if (!newMember.id) return;
     if (!Musicdata[newMember.guild.id]) return;
     if (!oldMember.channel) return;
     if (oldMember.channel.id == newMember.channel.id) return;
