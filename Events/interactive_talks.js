@@ -1,4 +1,3 @@
-var randomWords = require('random-words');
 const { client } = require("../index");
 const config = require("../config.json")
 const {axios, baseURL} = require("../Modules/api");
@@ -23,7 +22,7 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
     if (newState.channel && newState.channel.id === "950002659237183508"){
     
         //create a new channel
-        var new_channel = await newState.guild.channels.create(`Talk ${randomWords({exactly:1, wordsPerString:2, separator:'-'})}`, {parent: newState.channel.parent, type: "GUILD_VOICE",
+        var new_channel = await newState.guild.channels.create(`Talk ${newState.guild.channels.cache.get("736589204015808602").children.size}`, {parent: newState.channel.parent, type: "GUILD_VOICE",
          permissionOverwrites: [
             {
                 id: newState.member.id,
