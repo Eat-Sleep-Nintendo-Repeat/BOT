@@ -312,14 +312,16 @@ client.on("interactionCreate", (interaction) => {
 
 //sticky checker
 client.on("voiceStateUpdate", (oldMember, newMember) => {
-    if (!newMember.id) return;
-    if (!Musicdata[newMember.guild.id]) return;
-    if (!oldMember.channel) return;
-    if (oldMember.channel.id == newMember.channel.id) return;
-    if (newMember.id != Musicdata[newMember.guild.id].sticky) return;
-
-    //move bot to sticky user
-    Musicdata[newMember.guild.id].player.switchChannel(newMember.channel.id, {selfdeaf: true});
+    try {
+        if (!newMember.id) return;
+        if (!Musicdata[newMember.guild.id]) return;
+        if (!oldMember.channel) return;
+        if (oldMember.channel.id == newMember.channel.id) return;
+        if (newMember.id != Musicdata[newMember.guild.id].sticky) return;
+        Musicdata[newMember.guild.id].player.switchChannel(newMember.channel.id, {selfdeaf: true});
+    } catch (error) {
+     console.log(error);   
+    }
 })
 
 async function playcore(interaction) {
