@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { MessageEmbed, MessageActionRow, MessageSelectMenu } = require("discord.js");
 const lavacordManager = require("../index").musicmanager
 const urlRegex = new RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g);
 const axios = require("axios");
@@ -6,6 +6,7 @@ const axios = require("axios");
 const Musicdata = {};
 
 const {client} = require("../index");
+const { countDocuments } = require("../Models/SHOP-ARTIKEL");
 
 //Music commmand
 exports.command = {
@@ -305,7 +306,7 @@ client.on("interactionCreate", (interaction) => {
     search({query: interaction.options.get("url_or_search").value, }, function (err, results) {
         if (err || !results) return interaction.respond([]);
 
-        interaction.respond(results.videos.slice(0, 10).map(video => ({name: video.title, value: video.url})));
+        interaction.respond(results.videos.slice(0, 10).map(video => ({name: video.title, value: "autocomplete;" + video.url})));
     })
 
 })
@@ -423,11 +424,53 @@ async function playcore(interaction) {
 async function play (interaction, url, ontop) {
 const node = lavacordManager.idealNodes[0];
 
-// Check if the url is a valid youtube url
-var searchTerm = url;
+if (urlRegex.test(url) == false && !url.startsWith("autocomplete;")) {
+    //search on youtube
+    const search = require("yt-search");
+    await search({query: url, }, async function (err, results) {
+        if (err || !results) return await interaction.reply({ ephemeral: true, content: "Das konnte ich nicht auf YouTube finden" })
 
-const params = new URLSearchParams();
-params.append("identifier", urlRegex.test(searchTerm) ? searchTerm : `ytsearch:${searchTerm}`);
+        //Build embed
+        var embed = new MessageEmbed()
+            .setColor("#ff0000")
+            .setTitle("YouTube Suchergebnisse")
+            .setDescription(results.videos.slice(0, 10).map(video => `${results.videos.indexOf(video) + 1}. **[${video.title}](${video.url})**`).join("\n"))
+            .setFooter("Bitte wähle einen Titel aus der Liste aus");
+
+        //Build component
+        const interactionre = new MessageActionRow().addComponents(
+            new MessageSelectMenu()
+            .setCustomId(`play`)
+            .setPlaceholder("Wähle ein Ergebniss")
+            .setMaxValues(1)
+            .setMinValues(1)
+        )
+
+        interactionre.components[0].addOptions(results.videos.slice(0, 10).map(video =>( {
+            label:  `${results.videos.indexOf(video) + 1}. ${video.title.slice(0, 50)}`,
+            value: video.url
+        })));
+
+        var reply = await interaction.reply({ embeds: [embed], components: [interactionre], ephemeral: true, fetchReply: true });
+        
+        //Wait for user to select a video
+        const filter = i => i.customId === "play" && interaction.user.id === i.user.id;
+        const collector = reply.createMessageComponentCollector(m => m.user.id === interaction.user.id, {time: 30000, max: 1 });
+
+        collector.on("collect", async (i) => {
+            if (i.customId === "play") {
+                collector.stop();
+                interaction.reply = interaction.editReply;
+                await play(interaction, i.values[0], ontop);
+            }
+        });
+        
+    })
+} 
+else {
+
+    const params = new URLSearchParams();
+    params.append("identifier", url.replace("autocomplete;", ""));
 
 // Get the video info and load it into lavacord
 const data = await axios(`http://${node.host}:${node.port}/loadtracks?${params}`, {
@@ -479,7 +522,8 @@ if (Musicdata[interaction.guildId].fresh) {
 };
 
 //send message
-interaction.reply({ ephemeral: true, content: "Ich habe den Song in die Warteschlange gelegt" })
+interaction.reply({ ephemeral: true, content: "Ich habe den Song in die Warteschlange gelegt" , embeds: [], components: [] });
+};
 };
 
 async function skip(interaction) {
