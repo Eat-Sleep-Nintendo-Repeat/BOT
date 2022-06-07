@@ -1,3 +1,4 @@
+const { client } = require('../index.js');
 const VOTE = require('../Models/VOTES.js');
 const votemessagebuilder = require('../Modules/votemessagebuilder.js');
 const nanoid = require('nanoid').nanoid;
@@ -21,7 +22,7 @@ exports.command = {
                         },
                         {
                             name: "answers",
-                            description: "Antworten, die abgegeben werden können. Getrennt per´\"|\" z.B. \"Ja|Nein\"",
+                            description: "Antworten, die abgegeben werden können. Getrennt per\"|\" z.B. \"Ja|Nein\"",
                             type: 3,
                             required: true
                         },
@@ -38,6 +39,12 @@ exports.command = {
                             type: 4,
                             required: false,
                             min_value: 2
+                        },
+                        {
+                            name: "enddate",
+                            description: "Zeitpunkt, an dem die Abstimmung alleine enden soll. Format: YYYY-DD-MM hh:mm:ss",
+                            type: 3,
+                            required: false,
                         },
                     ]
                 },
@@ -61,7 +68,8 @@ exports.command = {
 
 	async execute(interaction) {
 
-        if (interaction.options.get("question")) {
+    //create a vote
+    if (interaction.options.get("question")) {
     
         const question = interaction.options.get("question").value
         const answers = interaction.options.get("answers").value.split("|")
@@ -85,9 +93,20 @@ exports.command = {
             vote.maxvotes = interaction.options.get("maxvotes").value
         }
 
+        //add enddate to vote if set
+        if (interaction.options.get("enddate")) {
+            vote.closingAt = new Date(interaction.options.get("enddate").value)
+        }
+
         
         //save Vote in Database
         vote.save()
+
+        //schedule end of vote
+        if (vote.closingAt) {
+            console.log("Scheduling end of vote")
+            require("../Events/voting")(vote)
+        }
 
         //send message to channel
         interaction.channel.send(votemessagebuilder(vote)).then(message => {
@@ -101,7 +120,9 @@ exports.command = {
 
 
 
-    } 
+
+    }
+    //end a vote
     else if (interaction.options.get("id")) {
         //get vote from Database
         VOTE.findOne({_id: interaction.options.get("id").value}, (err, vote) => {
@@ -109,17 +130,18 @@ exports.command = {
                 interaction.reply({ ephemeral: true, content: "Fehler beim Beenden der Abstimmung!" })
             } else if (vote) {
                 //end vote
-                vote.closingAt = new Date()
+                vote.closingAt = new Date();
                 vote.save()
                 interaction.channel.send(votemessagebuilder(vote, true)).then(message => {
-                    vote.message = message.id
-                    vote.channel = message.channel.id
-                    vote.save()
 
                     //update message
                     interaction.channel.messages.fetch(vote.message).then(message => {
                         message.edit(votemessagebuilder(vote, true))
                     })
+
+                    vote.message = message.id
+                    vote.channel = message.channel.id
+                    vote.save()
                 })
                 interaction.reply({ ephemeral: true, content: "Abstimmung beendet!" })
             } else {

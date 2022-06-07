@@ -11,7 +11,7 @@ client.on("interactionCreate", async interaction => {
         if (!vote) return;
 
         //check if vote has ended
-        if (vote.endtime < Date.now()) return await interaction.user.send("Diese Abstimmung ist bereits beendet!")
+        if (vote.closingAt < new Date()) return await interaction.user.send("Diese Abstimmung ist bereits beendet!")
 
         //check if user has already voted
         if (vote.voted_users.find(user => user.id === interaction.user.id)) return await interaction.user.send("Du hast bereits abgestimmt!");
@@ -29,3 +29,42 @@ client.on("interactionCreate", async interaction => {
 
 
     });
+
+//track vote with future closing time
+client.on("ready", async () => {
+    //fetch all votes from database
+    await VOTE.find({}, (err, votes) => {
+        //create a cronjob for every vote that has a closing time in the future
+        votes.forEach(vote => {
+            if (vote.closingAt > new Date()) {
+                endvote(vote)
+            }
+        })
+    })
+})
+
+async function endvote(vote) {
+    console.log("Scheduling end of vote")
+    const schedule = require('node-schedule'); 
+    const job = new schedule.scheduleJob(vote.closingAt, () => {
+        //check again if enddate is in the future
+
+        //end vote
+        vote.closingAt = new Date();
+        vote.save()
+        client.channels.fetch(vote.channel).then(async channel => {
+        await channel.send(votemessagebuilder(vote, true))
+
+            //update message
+            client.channels.cache.get(vote.channel).messages.fetch(vote.message).then(async message => {
+                await message.edit(votemessagebuilder(vote, true))
+
+                vote.message = message.id
+                vote.channel = message.channel.id
+                await vote.save()
+            })
+        })
+    })
+}
+
+module.exports = endvote;

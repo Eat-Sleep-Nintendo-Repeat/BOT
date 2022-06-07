@@ -1,3 +1,5 @@
+process.env.TZ = 'Europe/Berlin';
+
 const { Client, Intents, MessageEmbed, MessageButton, MessageActionRow } = require('discord.js');
 const config = require("./config.json")
 const fs = require("fs")

@@ -65,6 +65,6 @@ function calculatePoints() {
 
 // run calculatePoints every midnight
 const schedule = require('node-schedule');
-const job = schedule.scheduleJob('0 0 * * *', function(){
+    const job = schedule.scheduleJob('0 0 * * *', function(){
     calculatePoints();
   });
