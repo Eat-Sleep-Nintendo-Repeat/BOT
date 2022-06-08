@@ -18,7 +18,10 @@ client.on("interactionCreate", async interaction => {
 
         //add user to voted_users in and add vote to answer
         vote.voted_users.push({id: interaction.user.id});
-        vote.answers.find(answer => answer.id === interaction.values[0]).votes++;
+
+        interaction.values.forEach(value => {
+            vote.answers.find(answer => answer.id === value).votes++;
+        })
         
         //update database
         await vote.updateOne({voted_users: vote.voted_users, answers: vote.answers});

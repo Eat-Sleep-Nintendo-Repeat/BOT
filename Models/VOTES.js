@@ -3,6 +3,7 @@ const mongoose = require("mongoose")
 const Schema = mongoose.Schema({
     question: {type: String, required: true},
     answers: {type: Array, required: true}, // {answer: String, votes: Number, order: Number}} 
+    image: {type: String},
 
     minvotes: {type: Number, default: 1},
     maxvotes: {type: Number, default: 1},

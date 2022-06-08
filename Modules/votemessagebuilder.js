@@ -75,14 +75,18 @@ module.exports =  function VoteMessageBuilder(vote, endversion) {
 
         embed.setDescription(vote.answers.map(answer => `${intToEmoji(vote.answers.indexOf(answer) + 1, false)} ${answer.answer} \` ${answer.votes} (${votesInPercent(answer.votes)}) \``).join("\n\n"));
 
-        embed.setFooter(embed.footer.text + "\nDu hast nur eine Stimme!")
+        embed.setFooter(embed.footer.text + "\nDu kannst nur einmal abstimmen!")
+        
+        if (vote.image) {
+            embed.setImage(vote.image);
+        }
 
         //add min and max votes to footer if its set and not 0
         if (vote.minvotes > 1) {
-            embed.setFooter(embed.footer.text + " (Minimal: " + vote.minvotes + " Antworten)");
+            embed.setFooter(embed.footer.text + `\nApproval Voting System - Du musst mindestens ${vote.minvotes} und maximal ${vote.maxvotes} Antworten auswählen!`);
         }
-        if (vote.maxvotes > 1) {
-            embed.setFooter(embed.footer.text + " (Maximal: " + vote.maxvotes + " Antworten)");
+        else {
+            embed.setFooter(embed.footer.text + "\nPulrality Voting System - Du kannst eine Antwort auswählen!");
         }
 
         // add all answers to interaction
@@ -109,6 +113,18 @@ module.exports =  function VoteMessageBuilder(vote, endversion) {
         embed.setColor("RANDOM");
         embed.setFooter("Abstimmungs-ID: " + vote.id);
 
+        //add min and max votes to footer
+        if (vote.minvotes > 1) {
+            embed.setFooter(embed.footer.text + `\nApproval Voting System`);
+        }
+        else {
+            embed.setFooter(embed.footer.text + "\nPulrality Voting System");
+        }
+
+        if (vote.image) {
+            embed.setThumbnail(vote.image);
+        }
+
         //sort answers by votes
         vote.answers.sort(function (a, b) {
             return b.votes - a.votes;
@@ -117,14 +133,16 @@ module.exports =  function VoteMessageBuilder(vote, endversion) {
         //generate image
         const chart_url = ImageCharts()
         .cht('p3')
-        .chs('700x190')
+        .chs('500x190')
         .chd(`t:${vote.answers.map(x => (`${x.votes}`)).join(",")}`)
-        .chl(vote.answers.map(x => (`${x.answer}`)).join("|"))
+        .chdl(vote.answers.map(x => (`${x.answer}`)).join("|"))
+        .chl(vote.answers.filter(x => x.votes > 0).map(x => (`${x.order + 1}`)).join("|"))
+        .chco("36FF72,00A2BF")
         .toURL();
         embed.setImage(chart_url);
 
         embed.setDescription(vote.answers.map(answer => 
-            `${vote.answers.indexOf(answer) === 0 ? "**👑" : ""}
+            `${vote.answers.indexOf(answer) === 0 ? "**" : ""}
             ${intToEmoji(answer.order + 1, false)} ${answer.answer} \` ${answer.votes} (${votesInPercent(answer.votes)}) \`
             ${vote.answers.indexOf(answer) === 0 ? "**" : ""}`).join(""));
 

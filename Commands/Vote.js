@@ -46,6 +46,18 @@ exports.command = {
                             type: 3,
                             required: false,
                         },
+                        {
+                            name: "image-url",
+                            description: "Füge eine URL zu einem Bild hinzu. Standard: Kein Bild",
+                            type: 3,
+                            required: false,
+                        },
+                        {
+                            name: "image-upload",
+                            description: "Füge ein Bild als Datei hinzu. Standard: Kein Bild",
+                            type: 11,
+                            required: false,
+                        },
                     ]
                 },
                 {
@@ -74,7 +86,6 @@ exports.command = {
         const question = interaction.options.get("question").value
         const answers = interaction.options.get("answers").value.split("|")
 
-
         //create Vote in Database
         const vote = new VOTE({
             question: question,
@@ -85,7 +96,16 @@ exports.command = {
 
         //add minvotes to vote if set
         if (interaction.options.get("minvotes")) {
+            if (interaction.options.get("maxvotes") && interaction.options.get("maxvotes").value < interaction.options.get("minvotes").value) {
+                return interaction.reply({ephemeral: true, content: "Deine Maximalanzahl der Antworten muss größer oder gleich der Mindestanzahl sein."})
+            }
+
+            if (interaction.options.get("minvotes").value > answers.length) {
+                return interaction.reply({ephemeral: true, content: "Deine Mindestanzahl der Antworten muss kleiner oder gleich der Anzahl der Antworten sein."})
+            }
+
             vote.minvotes = interaction.options.get("minvotes").value
+
         }
 
         //add maxvotes to vote if set
@@ -96,6 +116,19 @@ exports.command = {
         //add enddate to vote if set
         if (interaction.options.get("enddate")) {
             vote.closingAt = new Date(interaction.options.get("enddate").value)
+        }
+
+        //add image to vote if set
+        if (interaction.options.get("image-url") && interaction.options.get("image-upload")) {
+            return interaction.reply({ephemeral: true, content: "Du kannst nur ein Bild per URL oder Upload hinzufügen. Beides gleichzeitig geht leider nicht."})
+        }
+
+        if (interaction.options.get("image-url")) {
+            vote.image = interaction.options.get("image-url").value
+        }
+
+        if (interaction.options.get("image-upload")) {
+            vote.image = interaction.options.get("image-upload").attachment.url
         }
 
         
