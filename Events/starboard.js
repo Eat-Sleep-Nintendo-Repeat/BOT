@@ -1,6 +1,7 @@
 var {client} = require("../index")
 var {MessageEmbed} = require("discord.js")
 var STARBOARD = require("../Models/STARBOARD")
+var IMAGE_STORE = require("../Models/IMAGESTORE");
 const {nanoid} = require("nanoid")
 
 var required_stars = 3;
@@ -12,6 +13,14 @@ client.on("messageReactionAdd", async (messageReaction, user) => {
     if (messageReaction.count >= required_stars == false) return;
 
     var starboarddb = await STARBOARD.findOne({"message": messageReaction.message.id})
+
+    //fetch avatar from imagestore
+    var image = await IMAGE_STORE.findOne({ type: "avatar", belong_to: messageReaction.message.author.id});
+
+    if (image) messageReaction.message.author.avatarURL = () => {
+        return `https://eat-sleep-nintendo-repeat.eu/api/imagestore/${image.id}`
+    }
+
     
     //new starboard message
     if (!starboarddb){

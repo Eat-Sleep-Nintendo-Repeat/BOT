@@ -1,4 +1,4 @@
-var schedule = require("node-schedule");
+const schedule = require('node-schedule');
 var {client} = require("../index")
 var MEMBER = require("../Models/MEMBER")
 var IMAGE_STORE = require("../Models/IMAGESTORE");

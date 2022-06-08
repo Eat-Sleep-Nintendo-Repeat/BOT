@@ -1,8 +1,10 @@
 const { MessageEmbed } = require("discord.js")
 var {client} = require("../index")
+var IMAGE_STORE = require("../Models/IMAGESTORE");
 var MEMBER = require("../Models/MEMBER")
 
 client.on("guildMemberAdd", async (member) => {
+
     var memberdb = await MEMBER.findOne({"id": member.id})
     var type = 1;
     if (member.user.bot) type = 50
@@ -37,14 +39,22 @@ client.on("guildMemberAdd", async (member) => {
 })
 
 client.on("guildMemberRemove", async (member) => {
+
+    //fetch avatar from imagestore
+    var image = await IMAGE_STORE.findOne({ type: "avatar", belong_to: member.user.id});
+
+    if (image) member.user.displayAvatarURL = () => {
+        return `https://eat-sleep-nintendo-repeat.eu/api/imagestore/${image.id}`
+    }
+
     var memberdb = await MEMBER.findOne({"id": member.id})
 
        var leaveemoji  = client.emojis.cache.get("723485426169413686") //#ff5757
 
-    //new member doc
+    //member not in database
     if (!memberdb){}
 
-    //member rejoined
+    //member left
     else {
         //decide how long we will keep the data of the leaving member in the Database
         var delete_date = new Date()
