@@ -82,7 +82,7 @@ module.exports =  function VoteMessageBuilder(vote, endversion) {
         }
 
         //add min and max votes to footer if its set and not 0
-        if (vote.minvotes > 1) {
+        if (vote.minvotes > 1 || vote.maxvotes > 1) {
             embed.setFooter(embed.footer.text + `\nApproval Voting System - Du musst mindestens ${vote.minvotes} und maximal ${vote.maxvotes} Antworten auswählen!`);
         }
         else {
@@ -114,7 +114,7 @@ module.exports =  function VoteMessageBuilder(vote, endversion) {
         embed.setFooter("Abstimmungs-ID: " + vote.id);
 
         //add min and max votes to footer
-        if (vote.minvotes > 1) {
+        if (vote.minvotes > 1 || vote.maxvotes > 1) {
             embed.setFooter(embed.footer.text + `\nApproval Voting System`);
         }
         else {
