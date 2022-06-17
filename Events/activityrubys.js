@@ -54,6 +54,7 @@ client.on("messageCreate", async (message) => {
 
 const voicestatecollecttion = []
 client.on("voiceStateUpdate", async (oldState, newState) => {
+    if (newState.member.user.bot) return;
 
     //member joined voice channel
     if (!oldState.channel && newState.channel) {
