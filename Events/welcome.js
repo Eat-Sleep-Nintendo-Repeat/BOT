@@ -24,14 +24,15 @@ client.on("guildMemberAdd", async (member) => {
         await new MEMBER({
             id: member.id,
             informations: {name: member.user.username, discriminator: member.user.discriminator, avatar: member.user.avatarURL()},
-            type: type
+            type: type,
+            joined: new Date()
         }).save()
         if (type == 50) return;
         client.channels.cache.get("585522626407956492").send({embeds: [new MessageEmbed().setColor("#77b800").setDescription(`${joinemoji} **${member.user.username}#${member.user.discriminator}** ist gerade ${member.guild.name} gejoint!`).setTimestamp(new Date()).setThumbnail(member.user.displayAvatarURL())]})
     }
     //member rejoined
     else {
-        await MEMBER.findOneAndUpdate({id: member.id}, {joined: new Date(), delete_in: null});
+        await MEMBER.findOneAndUpdate({id: member.id}, {delete_in: null});
         client.channels.cache.get("585522626407956492").send({embeds: [new MessageEmbed().setColor("#00c2cb").setDescription(`${rejoinemoji} **${member.user.username}#${member.user.discriminator}** ist gerade erneut ${member.guild.name} gejoint!\nWillkommen zurück ^^`).setTimestamp(new Date()).setThumbnail(member.user.displayAvatarURL())]})
     }
 
