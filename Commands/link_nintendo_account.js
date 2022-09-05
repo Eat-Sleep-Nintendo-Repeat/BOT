@@ -58,7 +58,7 @@ client.on("interactionCreate", async (interactionButton) => {
       )
       .then((res) => {
         console.log(res.data);
-        interactionButton.editReply({ embeds: [new Discord.MessageEmbed().setColor("RANDOM").setThumbnail(res.data.nintendo_account.imageUri).setTitle("Das hat geklappt!").setDescription(`Der Nintendo Account "${res.data.nintendo_account.name}" ist jetzt mit <@${interactionButton.user.id}> verknüpft!`).setFooter("/link-nintendo Befehl")] });
+        interactionButton.editReply({ embeds: [new Discord.MessageEmbed().setColor("RANDOM").setThumbnail(res.data.nintendo_account.imageUri).setTitle("Das hat geklappt!").setDescription(`Der Nintendo Account "${res.data.nintendo_account.name}" ist jetzt mit <@${interactionButton.user.id}> verknüpft!`).setFooter("/link_nintendo Befehl")] });
       })
       .catch((error) => {
         console.log(error);
