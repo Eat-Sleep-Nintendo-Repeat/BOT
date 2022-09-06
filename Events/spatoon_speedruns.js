@@ -171,15 +171,16 @@ var singleplayerstages = [
 ];
 
 var weaponemojis = {
-  0: { emoji: "1015569307402502174", name: "Heldenwaffe" },
-  1: { emoji: "1015569305779318804", name: "Helden-Roller" },
-  2: { emoji: "1015569304223236187", name: "Helden-Konzentrator" },
-  3: { emoji: "1015569301983469639", name: "Helden-Doppler" },
-  4: { emoji: "1015569300574183444", name: "Helden-Pluviator" },
-  5: { emoji: "1015569299022290994", name: "Helden-Splattling" },
-  6: { emoji: "1015569297688498236", name: "Helden-Blaster" },
-  7: { emoji: "1015569297688498236", name: "Helden-Schwapper" },
-  8: { emoji: "1015569294760890398", name: "Helden-Pinsel" },
+  0: { emoji: "1016760813492633681", name: "Heldenwaffe" },
+  1: { emoji: "1016760811743612948", name: "Helden-Roller" },
+  2: { emoji: "1016760810359496714", name: "Helden-Konzentrator" },
+  3: { emoji: "1016760808857948222", name: "Helden-Doppler" },
+  4: { emoji: "1016760807385739376", name: "Helden-Pluviator" },
+  5: { emoji: "1016760806144233473", name: "Helden-Splattling" },
+  6: { emoji: "1016760804684603463", name: "Helden-Blaster" },
+  7: { emoji: "1016760803342422046", name: "Helden-Schwapper" },
+  8: { emoji: "1016760801748582400", name: "Helden-Pinsel" },
+  100: { emoji: "607228015461793806", name: "Nicht bekannt" },
 };
 
 //intiger to emoji converter
@@ -239,7 +240,7 @@ function RunningEmbed(rundata, memberdata) {
         .setColor("F5ED5F")
         .setTitle(`Aktueller Speedrun:\nW${rundata.data.area}.LV${rundata.data.stage_id < 100 ? rundata.data.stage_id : client.emojis.cache.get("1015921513846800384")} - ${singleplayerstages.find((x) => x.id === rundata.data.stage_id).name}`)
         .setThumbnail(baseURL + "/splatnet2/singleplayer/runs/stagepic/" + rundata.data.stage_id + ".png")
-        .setDescription(`Eingereichte Speedruns:\n${rundata.data.runs.map((x) => `${intToEmoji(rundata.data.runs.indexOf(x) + 1, false)} - ${memberdata.data.find((y) => x.user === y.id).username}#${memberdata.data.find((y) => x.user === y.id).discriminator} - ${x.time ? require("../Modules/timetamp builder")(x.time * 1000) : "queued"} - ${x.weapon ? client.emojis.cache.get(weaponemojis[x.weapon].emoji) : ""}`).join("\n")}`)
+        .setDescription(`Eingereichte Speedruns:\n${rundata.data.runs.map((x) => `${intToEmoji(rundata.data.runs.indexOf(x) + 1, false)} - ${memberdata.data.find((y) => x.user === y.id).username}#${memberdata.data.find((y) => x.user === y.id).discriminator} - ${x.time ? require("../Modules/timetamp builder")(x.time * 1000) : "queued"} - ${x.weapon ? client.emojis.cache.get(weaponemojis[x.weapon].emoji) : client.emojis.cache.get(weaponemojis[100].emoji)}`).join("\n")}`)
         .setFooter({ text: `Letztes Update: ${new Date().toLocaleTimeString()} Uhr | Updates im 6 Minuten Intervall` }),
     ],
     components: [new Discord.MessageActionRow().addComponents(new Discord.MessageButton({ label: "Teilnehmen", emoji: "❇️", customId: "newparticipant", style: "PRIMARY", disabled: memberdata.length <= 50 }), new Discord.MessageButton({ label: "FAQ", url: "https://telegra.ph/Heromode-Speedruns---FAQ-09-05", style: "LINK" }), new Discord.MessageButton({ label: "Nintendo Account verbinden", url: "https://telegra.ph/Wie-verbinde-ich-meinen-Nintendo-Account-mit-dem-Eat-Sleep-Nintendo-Repeat-Bot-09-05", style: "LINK" }))],
