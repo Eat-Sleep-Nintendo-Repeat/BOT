@@ -12,161 +12,193 @@ var singleplayerstages = [
     id: "1",
     area: "1",
     name: "Die Oktarianer können's nicht lassen!",
+    img: "https://media.discordapp.net/attachments/770299663789457409/1016798102239322213/unknown.png",
   },
   {
     id: "2",
     area: "1",
     name: "Willkommen in Oktopia!",
+    img: "https://media.discordapp.net/attachments/770299663789457409/1016798102520332368/unknown.png",
   },
   {
     id: "3",
     area: "1",
     name: "Oktokopter im Abendrot",
+    img: "https://media.discordapp.net/attachments/770299663789457409/1016798102830723072/unknown.png",
   },
   {
     id: "101",
     area: "1",
     name: "Brotzeit mit Oktoback",
+    img: "https://media.discordapp.net/attachments/770299663789457409/1016798164675731526/unknown.png",
   },
   {
     id: "4",
     area: "2",
     name: "Oktospeier-Feier",
+    img: "https://media.discordapp.net/attachments/770299663789457409/1016798103216586882/unknown.png",
   },
   {
     id: "5",
     area: "2",
     name: "Surfen im Oktopark",
+    img: "https://media.discordapp.net/attachments/770299663789457409/1016798103615057961/unknown.png",
   },
   {
     id: "6",
     area: "2",
     name: "Invasion der Oktozepps",
+    img: "https://media.discordapp.net/attachments/770299663789457409/1016798104017703002/unknown.png",
   },
   {
     id: "7",
     area: "2",
     name: "Mega-Putz in der Seitengasse",
+    img: "https://media.discordapp.net/attachments/770299663789457409/1016798104386814002/unknown.png",
   },
   {
     id: "8",
     area: "2",
     name: "Schmonzette voller Schnalz",
+    img: "https://media.discordapp.net/attachments/770299663789457409/1016798104768483338/unknown.png",
   },
   {
     id: "9",
     area: "2",
     name: "Oktoling-Hinterhalt im Korallenviertel",
+    img: "https://media.discordapp.net/attachments/770299663789457409/1016798104986595429/unknown.png",
   },
   {
     id: "102",
     area: "2",
     name: "Oktosamurei rollt an",
+    img: "https://media.discordapp.net/attachments/770299663789457409/1016798165007089724/unknown.png",
   },
   {
     id: "10",
     area: "3",
     name: "Vorbei an der Oktopatrouille",
+    img: "https://media.discordapp.net/attachments/770299663789457409/1016798105225666590/unknown.png",
   },
   {
     id: "11",
     area: "3",
     name: "Jäger und Gejagte",
+    img: "https://media.discordapp.net/attachments/770299663789457409/1016798141095366766/unknown.png",
   },
   {
     id: "12",
     area: "3",
     name: "Die Hüpfburg der Oktarianer",
+    img: "https://media.discordapp.net/attachments/770299663789457409/1016798141359603833/unknown.png",
   },
   {
     id: "13",
     area: "3",
     name: "Drehschalter und tanzende Flächen",
+    img: "https://media.discordapp.net/attachments/770299663789457409/1016798141690957894/unknown.png",
   },
   {
     id: "14",
     area: "3",
     name: "Parkhaus-Parkour",
+    img: "https://media.discordapp.net/attachments/770299663789457409/1016798141997129798/unknown.png",
   },
   {
     id: "15",
     area: "3",
     name: "Oktoling-Hinterhalt auf der Buckelwal-Piste",
+    img: "https://media.discordapp.net/attachments/770299663789457409/1016798142290739230/unknown.png",
   },
   {
     id: "103",
     area: "3",
     name: "Oktopressor wieder am Drücker",
+    img: "https://media.discordapp.net/attachments/770299663789457409/1016798165351014410/unknown.png",
   },
   {
     id: "16",
     area: "4",
     name: "Intermezzo auf der Bowlingbahn",
+    img: "https://media.discordapp.net/attachments/770299663789457409/1016798142894706790/unknown.png",
   },
   {
     id: "17",
     area: "4",
     name: "In der Festung der Oktokommandanten",
+    img: "https://media.discordapp.net/attachments/770299663789457409/1016798143158943864/unknown.png",
   },
   {
     id: "18",
     area: "4",
     name: "Turmhoch überlegen",
+    img: "https://media.discordapp.net/attachments/770299663789457409/1016798143536439336/unknown.png",
   },
   {
     id: "19",
     area: "4",
     name: "Das Experimentorium",
+    img: "https://media.discordapp.net/attachments/770299663789457409/1016798143754547220/unknown.png",
   },
   {
     id: "20",
     area: "4",
     name: "Auf und Ab im Propellerland",
+    img: "https://media.discordapp.net/attachments/770299663789457409/1016798144048140358/unknown.png",
   },
   {
     id: "21",
     area: "4",
     name: "Oktoling-Hinterhalt an den Muränentürmen",
+    img: "https://media.discordapp.net/attachments/770299663789457409/1016798162809258004/unknown.png",
   },
   {
     id: "104",
     area: "4",
     name: "Oktoplanscher schlägt Wellen",
+    img: "https://media.discordapp.net/attachments/770299663789457409/1016798212062982304/104.png",
   },
   {
     id: "22",
     area: "5",
     name: "Pfade ins Ungewisse",
+    img: "https://media.discordapp.net/attachments/770299663789457409/1016798163018977400/unknown.png",
   },
   {
     id: "23",
     area: "5",
     name: "Reise durch die Oktogalaxie",
+    img: "https://media.discordapp.net/attachments/770299663789457409/1016798163258069042/unknown.png",
   },
   {
     id: "24",
     area: "5",
     name: "Kreuz und quer über dem Meer",
+    img: "https://media.discordapp.net/attachments/770299663789457409/1016798163497123870/unknown.png",
   },
   {
     id: "25",
     area: "5",
     name: "Verschiebung gen Wahnsinn",
+    img: "https://media.discordapp.net/attachments/770299663789457409/1016798163723624488/unknown.png",
   },
   {
     id: "26",
     area: "5",
     name: "Unruhige Kugel am Strand",
+    img: "https://media.discordapp.net/attachments/770299663789457409/1016798163958517810/unknown.png",
   },
   {
     id: "27",
     area: "5",
     name: "Oktoling-Hinterhalt in der Molluskelbude",
+    img: "https://media.discordapp.net/attachments/770299663789457409/1016798164394717224/unknown.png",
   },
   {
     id: "105",
     area: "5",
     name: "Bomb Rush Blush der Herzen",
+    img: "https://media.discordapp.net/attachments/770299663789457409/1016798212331413514/105.png",
   },
 ];
 
@@ -239,7 +271,7 @@ function RunningEmbed(rundata, memberdata) {
       new MessageEmbed()
         .setColor("F5ED5F")
         .setTitle(`Aktueller Speedrun:\nW${rundata.data.area}.LV${rundata.data.stage_id < 100 ? rundata.data.stage_id : client.emojis.cache.get("1015921513846800384")} - ${singleplayerstages.find((x) => x.id === rundata.data.stage_id).name}`)
-        .setThumbnail(baseURL + "/splatnet2/singleplayer/runs/stagepic/" + rundata.data.stage_id + ".png")
+        .setThumbnail(singleplayerstages.find((x) => x.id === rundata.data.stage_id).img)
         .setDescription(`Eingereichte Speedruns:\n${rundata.data.runs.map((x) => `${intToEmoji(rundata.data.runs.indexOf(x) + 1, false)} - ${memberdata.data.find((y) => x.user === y.id).username}#${memberdata.data.find((y) => x.user === y.id).discriminator} - ${x.time ? require("../Modules/timetamp builder")(x.time * 1000) : "queued"} - ${x.weapon ? client.emojis.cache.get(weaponemojis[x.weapon].emoji) : client.emojis.cache.get(weaponemojis[100].emoji)}`).join("\n")}`)
         .setFooter({ text: `Letztes Update: ${new Date().toLocaleTimeString()} Uhr | Updates im 6 Minuten Intervall` }),
     ],
