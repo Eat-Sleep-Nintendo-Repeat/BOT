@@ -346,7 +346,7 @@ client.once("ready", async () => {
       });
   });
 
-  var create_new_run = schedule.scheduleJob("0 * * *", async function () {
+  var create_new_run = schedule.scheduleJob("0 0 * * *", async function () {
     infomessage = await client.channels.cache.get("1013848707961196544").messages.fetch("1013870260023201915");
     message = await client.channels.cache.get("1013848707961196544").messages.fetch("1013870278981460009");
     //create new run
