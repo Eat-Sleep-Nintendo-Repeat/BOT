@@ -3,9 +3,16 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema({
   id: { type: String, required: true },
   state: { type: String, default: "SCHEDULED" },
-  players: { type: Array, default: [] },
+  players: [
+    {
+      id: String,
+      team: String,
+      cloud: Number,
+      rank: String,
+    },
+  ],
   message: { type: String, required: true },
-  talk: { type: String, default: null },
+  channel: { type: String, default: null },
   fights: { type: Array, default: [] },
   teamroles: [
     {
