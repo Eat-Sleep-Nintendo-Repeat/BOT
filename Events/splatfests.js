@@ -12,8 +12,8 @@ function toRgb(color) {
 }
 
 //check splatfest data
-// var check_for_splatfests = schedule.scheduleJob("*/15 * * * *", async function () {
-client.on("ready", () => {
+var check_for_splatfests = schedule.scheduleJob("*/15 * * * *", async function () {
+  // client.on("ready", () => {
   axios.get(baseURL + "/splatnet3/splatfests").then(async (res) => {
     if (!res.data) {
       console.log("Error while fetching Splatfestdata basic");
