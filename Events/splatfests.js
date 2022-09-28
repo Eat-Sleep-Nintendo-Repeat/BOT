@@ -5,24 +5,25 @@ const { MessageEmbed } = require("discord.js");
 var Discord = require("discord.js");
 var SPLATFESTS = require("../Models/SPLATFEST");
 var MEMBER = require("../Models/MEMBER");
-const { clearCustomQueryHandlers } = require("puppeteer");
+var table = require("table");
 
 function toRgb(color) {
   return [color.r * 255, color.g * 255, color.b * 255];
 }
 
 //check splatfest data
-var check_for_splatfests = schedule.scheduleJob("*/15 * * * *", async function () {
-  // client.on("ready", () => {
+// var check_for_splatfests = schedule.scheduleJob("*/15 * * * *", async function () {
+client.on("ready", () => {
   axios.get(baseURL + "/splatnet3/splatfests").then(async (res) => {
     if (!res.data) {
       console.log("Error while fetching Splatfestdata basic");
       return;
     }
-    axios.post(baseURL + "/splatnet3/dev", { name: `${res.data[0].state}` });
 
     //check if id is the last one i have i database
     var splatfetstdb = await SPLATFESTS.findOne({ id: res.data[0].id });
+
+    if (splatfetstdb.state === "ENDET") return;
 
     var splatfestdataextendet = await axios.get(baseURL + "/splatnet3/splatfests/" + res.data[0].id);
 
@@ -65,7 +66,7 @@ var check_for_splatfests = schedule.scheduleJob("*/15 * * * *", async function (
             .setTitle("EIN NEUES SPLATFEST WURDE ANGEKÜNDIGT")
             .setDescription(`Ein neues Splatfest steht bevor! Es findet vom <t:${Math.floor(Date.parse(res.data[0].startTime) / 1000)}:F> bis zum <t:${Math.floor(Date.parse(res.data[0].endTime) / 1000)}:F> statt\n\n**${res.data[0].title}**\n<@&${role1.id}>\n<@&${role2.id}>\n<@&${role3.id}>`)
             .setImage(res.data[0].image)
-            .setThumbnail("https://cdn.discordapp.com/attachments/770299663789457409/1022922019962097674/Zeichenflache_14x.png")
+            .setThumbnail("https://cdn.discordapp.com/attachments/644283425389412357/1024758682828935289/unknown.png")
             .setFooter("Wenn du deinen Nintendo Account verknüpft hast, wird dir automatisch eine Team Rolle zugeteilt sobald du in Splatoon 3 gewählt hast."),
         ],
         content: "<@&948289316055027743>",
@@ -165,7 +166,7 @@ var check_for_splatfests = schedule.scheduleJob("*/15 * * * *", async function (
           .then(async (channel) => {
             splatfetstdb.channel = channel.id;
             await channel.send({
-              embeds: [new MessageEmbed().setColor("RANDOM").setTitle("Das Splatfest beginnt!").setDescription(`Das Splatfest hat offiziell begonnen!`).setImage(res.data[0].image).setThumbnail("https://cdn.discordapp.com/attachments/770299663789457409/1022922019962097674/Zeichenflache_14x.png").setFooter("Wenn du deinen Nintendo Account verknüpft hast, Werden in diesem Channel automaisch deine Splatfest Erfolge verzeichnet!")],
+              embeds: [new MessageEmbed().setColor("RANDOM").setTitle("Das Splatfest beginnt!").setDescription(`Das Splatfest hat offiziell begonnen!`).setImage(res.data[0].image).setThumbnail("https://cdn.discordapp.com/attachments/644283425389412357/1024758682828935289/unknown.png").setFooter("Wenn du deinen Nintendo Account verknüpft hast, Werden in diesem Channel automaisch deine Splatfest Erfolge verzeichnet!")],
               content: "<@&948289316055027743>",
               components: [new Discord.MessageActionRow().addComponents(new Discord.MessageButton({ label: "FAQ - Nintendo Account verbinden?", url: "https://telegra.ph/Wie-verbinde-ich-meinen-Nintendo-Account-mit-dem-Eat-Sleep-Nintendo-Repeat-Bot-09-05", style: "LINK" }))],
             });
@@ -205,13 +206,58 @@ var check_for_splatfests = schedule.scheduleJob("*/15 * * * *", async function (
         });
       }
 
-      //DEV SHIT
-      if (splatfetstdb.state === "SECOND_HALF" && splatfestdataextendet.data.state != "SECOND_HALF") {
+      //End of Splatfest
+      if (splatfetstdb.state === "SECOND_HALF" && splatfestdataextendet.data.state === "CLOSED") {
         splatfetstdb.state = splatfestdataextendet.data.state;
 
         client.channels.cache.get(splatfetstdb.channel).send({
-          embeds: [new MessageEmbed().setColor("RANDOM").setTitle("SPLATFEST ENDE").setDescription(`Und damit ist das Splatfest beendet! Die Splafestrollen und dieser Channel sollten eigentlich nach dem Splatfest automatisch gelöscht werden. Da Dustin allerdings nicht weiß wie die Splatfest Daten von den Nintendo Servern nach einem Splatfest aussehen und er sich das dann erst nach der Arbeit anschauen kann, bleiben diese Dinge bis dahin erstmal.`).setImage(res.data[0].image)],
+          embeds: [new MessageEmbed().setColor("RANDOM").setTitle("SPLATFEST ENDE").setDescription(`Und damit ist das Splatfest vorbei! Der Miezrichter wertet nun die Ergebnisse aus. Sobald die Ergebnisse öffentlich sind werde ich sie in <#586177035278483466> zusammen fassen ^^`).setThumbnail("")],
         });
+      }
+
+      //check if results are releaseds
+      if (splatfetstdb.state === "CLOSED") {
+        console.log(splatfestdataextendet.data.teams[0].result);
+        if (!splatfestdataextendet.data.teams[0].result) return;
+        splatfetstdb.state = "ENDET";
+
+        //Fetch best players
+
+        //Send Results
+
+        var tabledata = [];
+        tabledata.push([" "]);
+        tabledata.push(["C-Shells"]);
+        tabledata.push(["Votes"]);
+        tabledata.push(["Open"]);
+        tabledata.push(["Pro"]);
+
+        //Add team data
+        splatfestdataextendet.data.teams.forEach((t) => {
+          tabledata[0].push(t.teamName);
+          tabledata[1].push((t.result.isHoragaiRatioTop ? ">> " : "   ") + Math.round(t.result.horagaiRatio * 100) + "%" + (t.result.isHoragaiRatioTop ? " <<" : "   "));
+          tabledata[2].push((t.result.isVoteRatioTop ? ">> " : "   ") + Math.round(t.result.voteRatio * 100) + "%" + (t.result.isVoteRatioTop ? " <<" : "  "));
+          tabledata[3].push((t.result.isRegularContributionRatioTop ? ">> " : "   ") + Math.round(t.result.regularContributionRatio * 100) + "%" + (t.result.isRegularContributionRatioTop ? " <<" : "   "));
+          tabledata[4].push((t.result.isChallengeContributionRatioTop ? ">> " : "   ") + Math.round(t.result.challengeContributionRatio * 100) + "%" + (t.result.isChallengeContributionRatioTop ? " <<" : "   "));
+        });
+        client.channels.cache.get("586177035278483466").send({
+          embeds: [
+            new MessageEmbed()
+              .setTitle("DIE SPLATFEST ERGEBNISSE SIND DA!")
+              .setDescription("```" + table.table(tabledata, { header: { content: "Splatfest Ergebnisse", alignment: "center" } }) + "```")
+              .setColor(toRgb(splatfestdataextendet.data.teams.find((t) => t.result.isWinner === true).color))
+              .setThumbnail("https://cdn.discordapp.com/attachments/644283425389412357/1024758682828935289/unknown.png")
+              .setFooter("Smartphone Nutzer sollten ihr Gerät für eine lesbare Ansicht vertikal halten."),
+          ],
+        });
+
+        //Delete splatfest roles
+        splatfetstdb.teamroles.forEach((t) => {
+          client.guilds.cache.get("585511241628516352").roles.delete(t.main);
+        });
+
+        //Delete Splatfest Channel
+        client.guilds.cache.get("585511241628516352").channels.delete(splatfetstdb.channel);
       }
 
       Promise.all(promises).then(async () => {
