@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans+Caption:wght@700&display=swap" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div>
+      <img src="./images/Meme_Man_on_transparent_background.webp.png" alt="meme_man" />
+      <h1 style="font-family: 'PT Sans Caption', sans-serif"></h1>
+    </div>
+  </body>
+</html>
+
+<style>
+  body {
+    text-align: center;
+
+    height: 100vh;
+  }
+
+  div {
+    padding-top: 15vh;
+  }
+
+  h1 {
+    font-size: 10vh;
+  }
+
+  img {
+    width: 50vh;
+  }
+</style>
+
+<script>
+  const urlSearchParams = new URLSearchParams(window.location.search);
+  const params = Object.fromEntries(urlSearchParams.entries());
+
+  document.querySelector("h1").innerHTML = params.title;
+</script>
