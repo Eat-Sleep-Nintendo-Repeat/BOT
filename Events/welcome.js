@@ -4,6 +4,7 @@ var IMAGE_STORE = require("../Models/IMAGESTORE");
 var MEMBER = require("../Models/MEMBER")
 
 client.on("guildMemberAdd", async (member) => {
+    if (member.guild.id != "585511241628516352") return;
 
     var memberdb = await MEMBER.findOne({"id": member.id})
     var type = 1;
@@ -40,6 +41,7 @@ client.on("guildMemberAdd", async (member) => {
 })
 
 client.on("guildMemberRemove", async (member) => {
+    if (member.guild.id != "585511241628516352") return;
 
     //fetch avatar from imagestore
     var image = await IMAGE_STORE.findOne({ type: "avatar", belong_to: member.user.id});
